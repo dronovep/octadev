@@ -18,6 +18,7 @@ class ObTemplater extends Functional implements Renderer {
     }
 
     protected function execute() {
+
         extract($this->context);
 
         ob_start();

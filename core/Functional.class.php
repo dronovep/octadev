@@ -40,11 +40,13 @@ abstract class Functional {
                 );
             }
         } else {
+
+//                $property_class = new ReflectionClass($required_type);
             try {
-                $property_class = new ReflectionClass($required_type);
-            } catch (ReflectionException $e) {
+                class_exists($required_type);
+            } catch (Exception $e) {
                 throw new Exception(
-                    "Неверно описана сигнатура функционала: для поля $property_name указан несуществующий тип $required_type"
+                    "Неправильно составлена сигнатура функционала: полю $property_name указан несуществующий тип $required_type"
                 );
             }
 

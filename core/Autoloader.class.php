@@ -24,6 +24,11 @@ class Autoloader {
     ];
 
     private static function load($classname) {
+
+        if (!key_exists($classname, self::$map) or !file_exists(self::$map[$classname])){
+            throw new Exception('Класс не указан в карте или его файл не найден');
+        }
+
         require_once self::$map[$classname];
     }
 

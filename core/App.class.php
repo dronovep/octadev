@@ -9,27 +9,18 @@
 class App {
 
     private $context = [
-        'techname' => 'Gulp'
+        'techname' => 'Gulp',
+        'markup' => Constants::COMPONENTS_PATH . 'Button/markup.php',
+        'class' => 'mbutton',
+        'name' => 'Кнопка'
     ];
 
     public function run() {
 
         $templater = new ObTemplater([]);
-        $templater->template_filename = Constants::COMPONENTS_PATH . 'MainPage/' . 'markup.php';
-        $templater->context = $this->context;
-        $templater->vaka = 'sdwef';
-        echo $templater->vaka;
+            $templater->template_filename = Constants::COMPONENTS_PATH . 'MainPage/' . 'markup.php';
+            $templater->context = $this->context;
+
         echo $templater->render();
-
-//        echo (new ObTemplater([
-//            'context' => $this->context,
-//            'template_filename' => Constants::COMPONENTS_PATH . 'MainPage/' . 'markup.php'
-//        ]))->render();
-
     }
 }
-
-//        echo (new ObTemplater([
-//            'context' => $this->context,
-//            'template_filename' => Constants::COMPONENTS_PATH . 'MainPage/' . 'markup.php'
-//        ]))->render();
