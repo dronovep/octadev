@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "noImplicitAny": true,
+    "target": "es5",
+    "sourceMap": true,
+    "outDir": "public/assets/scripts/"
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "files": [
+      "components/MainPage/script.ts"
+  ]
+}

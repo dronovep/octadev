@@ -15,4 +15,12 @@ class Constants {
 
     /* @var string путь к web-публичной папке приложения относительно корня  */
     const WEB_PATH = self::PROJECT_ROOT .'public/';
+
+    const PHP_ELEMENTARY_TYPES = [
+        'int',
+        'bool',
+        'float',
+        'string',
+        'array'
+    ];
 };

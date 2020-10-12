@@ -15,7 +15,12 @@ class Autoloader {
         'Autoloader'  => Constants::PROJECT_ROOT        . 'core/' . 'Autoloader.class.php',
         'Environment' => Constants::PROJECT_ROOT        . 'core/' . 'Environment.class.php',
         'DatabaseRequisites' => Constants::PROJECT_ROOT . 'database/DatabaseRequisites.class.php',
-        'App' => Constants::PROJECT_ROOT . 'core/' . 'App.class.php'
+        'App' => Constants::PROJECT_ROOT . 'core/' . 'App.class.php',
+        'Button' => Constants::COMPONENTS_PATH . 'Button/' . 'Button.class.php',
+        'Renderer' => Constants::PROJECT_ROOT . 'core/' . 'Renderer.interface.php',
+        'ObTemplater' => Constants::PROJECT_ROOT . 'core/' . 'ObTemplater.class.php',
+        'ObjectStateValidator' => Constants::PROJECT_ROOT . 'core/' . 'ObjectStateValidator.interface.php',
+        'Functional' => Constants::PROJECT_ROOT . 'core/' . 'Functional.class.php'
     ];
 
     private static function load($classname) {

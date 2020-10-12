@@ -13,14 +13,23 @@ class App {
     ];
 
     public function run() {
-        $main_page_view_file = Constants::COMPONENTS_PATH . 'MainPage/' . 'View.php';
 
-        extract($this->context);
+        $templater = new ObTemplater([]);
+        $templater->template_filename = Constants::COMPONENTS_PATH . 'MainPage/' . 'markup.php';
+        $templater->context = $this->context;
+        $templater->vaka = 'sdwef';
+        echo $templater->vaka;
+        echo $templater->render();
 
-        ob_start();
-        include $main_page_view_file;
-        $html = ob_get_clean();
+//        echo (new ObTemplater([
+//            'context' => $this->context,
+//            'template_filename' => Constants::COMPONENTS_PATH . 'MainPage/' . 'markup.php'
+//        ]))->render();
 
-        echo $html;
     }
 }
+
+//        echo (new ObTemplater([
+//            'context' => $this->context,
+//            'template_filename' => Constants::COMPONENTS_PATH . 'MainPage/' . 'markup.php'
+//        ]))->render();
