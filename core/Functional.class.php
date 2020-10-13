@@ -17,6 +17,7 @@ abstract class Functional {
 
     public final function __construct(array $args) {
 
+        $this->predecorateConstructor($args);
         $this->unset_properties = [];
         foreach (static::SIGNATURE AS $name => $type) {
             $this->unset_properties[$name] = null;
@@ -26,6 +27,8 @@ abstract class Functional {
             $this->__set($name, $value);
         }
     }
+
+    protected abstract function predecorateConstructor(array &$args);
 
     protected final function checkPropertyType(string $property_name, $property_value) {
 
@@ -41,7 +44,6 @@ abstract class Functional {
             }
         } else {
 
-//                $property_class = new ReflectionClass($required_type);
             try {
                 class_exists($required_type);
             } catch (Exception $e) {

@@ -17,11 +17,12 @@ class Autoloader {
         'DatabaseRequisites' => Constants::PROJECT_ROOT . 'database/DatabaseRequisites.class.php',
         'App' => Constants::PROJECT_ROOT . 'core/' . 'App.class.php',
         'Button' => Constants::COMPONENTS_PATH . 'Button/' . 'Button.class.php',
-        'Renderer' => Constants::PROJECT_ROOT . 'core/' . 'Renderer.interface.php',
+        'Templater' => Constants::PROJECT_ROOT . 'core/' . 'Templater.class.php',
         'ObTemplater' => Constants::PROJECT_ROOT . 'core/' . 'ObTemplater.class.php',
         'ObjectStateValidator' => Constants::PROJECT_ROOT . 'core/' . 'ObjectStateValidator.interface.php',
         'Functional' => Constants::PROJECT_ROOT . 'core/' . 'Functional.class.php',
-        'TemplateNameToFileMapper' => Constants::PROJECT_ROOT . 'core/' . 'TemplateNameToFileMapper.class.php',
+        'NameToFileMapper' => Constants::PROJECT_ROOT . 'core/' . 'NameToFileMapper.interface.php',
+        'PhpViewTemplateNameToFileMapper' => Constants::PROJECT_ROOT . 'core/' . 'PhpViewTemplateNameToFileMapper.class.php',
         'ControlDevelopment' => Constants::COMPONENTS_PATH  . 'ControlDevelopment/' . 'ControlDevelopment.class.php'
     ];
 

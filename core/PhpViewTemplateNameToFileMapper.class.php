@@ -6,7 +6,7 @@
  * Time: 12:49
  */
 
-class TemplateNameToFileMapper {
+class PhpViewTemplateNameToFileMapper implements NameToFileMapper {
 
     public function map(string $template_name): string {
         return Constants::TEMPLATES_PATH . $template_name . '.php';

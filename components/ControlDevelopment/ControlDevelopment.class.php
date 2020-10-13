@@ -25,7 +25,7 @@ class ControlDevelopment {
         return (new ObTemplater([
             'context' => $this->context,
             'template' => $this->template
-        ]))->render();
+        ]))->call();
     }
 }
 

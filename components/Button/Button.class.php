@@ -31,6 +31,6 @@ class Button {
                 'label' => $this->label
             ],
             'template' => $this->template
-        ]))->render();
+        ]))->call();
     }
 }

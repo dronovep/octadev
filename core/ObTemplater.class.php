@@ -6,27 +6,18 @@
  * Time: 18:54
  */
 
-class ObTemplater extends Functional implements Renderer {
+class ObTemplater extends Templater{
 
-    const SIGNATURE = [
-        'context' => 'array',
-        'template' => 'string'
-    ];
+    protected function predecorateConstructor(array& $args) {
 
-    public function render(): string {
-        return $this->call();
+        $args['template_name_to_file_mapper'] = new PhpViewTemplateNameToFileMapper();
     }
 
-    protected function execute() {
-
-        $template_file = (new TemplateNameToFileMapper())->map($this->template);
-        if (!file_exists($template_file)) {
-            throw new Exception("Не найден файл для указанного имени шаблона");
-        }
+    protected function substituteContextIntoTemplate(): string {
 
         extract($this->context);
         ob_start();
-        include $template_file;
+        include $this->template_file;
 
         return ob_get_clean();
     }
