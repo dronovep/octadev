@@ -10,7 +10,7 @@ class ObTemplater extends Functional implements Renderer {
 
     const SIGNATURE = [
         'context' => 'array',
-        'template_filename' => 'string'
+        'template' => 'string'
     ];
 
     public function render(): string {
@@ -19,10 +19,14 @@ class ObTemplater extends Functional implements Renderer {
 
     protected function execute() {
 
-        extract($this->context);
+        $template_file = (new TemplateNameToFileMapper())->map($this->template);
+        if (!file_exists($template_file)) {
+            throw new Exception("Не найден файл для указанного имени шаблона");
+        }
 
+        extract($this->context);
         ob_start();
-        include $this->template_filename;
+        include $template_file;
 
         return ob_get_clean();
     }

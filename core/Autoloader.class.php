@@ -20,7 +20,9 @@ class Autoloader {
         'Renderer' => Constants::PROJECT_ROOT . 'core/' . 'Renderer.interface.php',
         'ObTemplater' => Constants::PROJECT_ROOT . 'core/' . 'ObTemplater.class.php',
         'ObjectStateValidator' => Constants::PROJECT_ROOT . 'core/' . 'ObjectStateValidator.interface.php',
-        'Functional' => Constants::PROJECT_ROOT . 'core/' . 'Functional.class.php'
+        'Functional' => Constants::PROJECT_ROOT . 'core/' . 'Functional.class.php',
+        'TemplateNameToFileMapper' => Constants::PROJECT_ROOT . 'core/' . 'TemplateNameToFileMapper.class.php',
+        'ControlDevelopment' => Constants::COMPONENTS_PATH  . 'ControlDevelopment/' . 'ControlDevelopment.class.php'
     ];
 
     private static function load($classname) {

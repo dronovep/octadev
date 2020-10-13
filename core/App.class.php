@@ -8,19 +8,9 @@
 
 class App {
 
-    private $context = [
-        'techname' => 'Gulp',
-        'markup' => Constants::COMPONENTS_PATH . 'Button/markup.php',
-        'class' => 'mbutton',
-        'name' => 'Кнопка'
-    ];
-
     public function run() {
 
-        $templater = new ObTemplater([]);
-            $templater->template_filename = Constants::COMPONENTS_PATH . 'MainPage/' . 'markup.php';
-            $templater->context = $this->context;
-
-        echo $templater->render();
+        $control = new Button('button', 'mbutton', 'Кнопка');
+        echo new ControlDevelopment($control);
     }
 }
