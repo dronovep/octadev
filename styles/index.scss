@@ -1,0 +1,34 @@
+* {
+    box-sizing: border-box;
+}
+
+html.control_development {
+    margin:0;
+    padding:0;
+    width: 100vw;
+    height: 100vh;
+}
+
+html.control_development > body {
+    width: 100%;
+    height: 100%;
+    margin:0;
+    padding:0;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.control_development .control {
+    margin: auto;
+}
+
+.mbutton {
+    border-radius: 4px;
+    background-color: #59358d;
+    padding: 6px;
+    display: inline-block;
+    color:white;
+}
+.mbutton:hover {
+    background-color: #6a3fa6;
+}

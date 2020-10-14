@@ -6,19 +6,11 @@
  * Time: 18:54
  */
 
-class ObTemplater extends Templater{
+class ObTemplater extends Templater {
 
     protected function predecorateConstructor(array& $args) {
 
         $args['template_name_to_file_mapper'] = new PhpViewTemplateNameToFileMapper();
-    }
-
-    protected function substituteContextIntoTemplate(): string {
-
-        extract($this->context);
-        ob_start();
-        include $this->template_file;
-
-        return ob_get_clean();
+        $args['context_substitutor'] = new ObFileTemplateContextSubstitutor();
     }
 }

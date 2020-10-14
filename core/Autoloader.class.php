@@ -23,7 +23,9 @@ class Autoloader {
         'Functional' => Constants::PROJECT_ROOT . 'core/' . 'Functional.class.php',
         'NameToFileMapper' => Constants::PROJECT_ROOT . 'core/' . 'NameToFileMapper.interface.php',
         'PhpViewTemplateNameToFileMapper' => Constants::PROJECT_ROOT . 'core/' . 'PhpViewTemplateNameToFileMapper.class.php',
-        'ControlDevelopment' => Constants::COMPONENTS_PATH  . 'ControlDevelopment/' . 'ControlDevelopment.class.php'
+        'ControlDevelopment' => Constants::COMPONENTS_PATH  . 'ControlDevelopment/' . 'ControlDevelopment.class.php',
+        'Substitutor' => Constants::PROJECT_ROOT  . 'core/' . 'Substitutor.interface.php',
+        'ObFileTemplateContextSubstitutor' => Constants::PROJECT_ROOT  . 'core/' . 'ObFileTemplateContextSubstitutor.class.php'
     ];
 
     private static function load($classname) {

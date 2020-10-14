@@ -11,23 +11,23 @@ abstract class Templater extends Functional {
     const SIGNATURE = [
         'context' => 'array',
         'template' => 'string',
-        'template_name_to_file_mapper' => 'NameToFileMapper'
+        'template_name_to_file_mapper' => 'NameToFileMapper',
+        'context_substitutor' => 'Substitutor'
     ];
 
-    protected $template_file;
+    protected final function findTemplateFile(): string {
 
-    protected final function findTemplateFile() {
         $template = $this->template;
-        $this->template_file = $this->template_name_to_file_mapper->map($template);
-        if (!file_exists($this->template_file)) {
-            throw new Exception("Не найден файл $this->template_file для указанного имени шаблона $template");
+        $template_file = $this->template_name_to_file_mapper->map($template);
+        if (!file_exists($template_file)) {
+            throw new Exception("Не найден файл $template_file для указанного имени шаблона $template");
         }
+
+        return $template_file;
     }
 
-    protected abstract function substituteContextIntoTemplate():string;
-
     protected final function execute() {
-        $this->findTemplateFile();
-        return $this->substituteContextIntoTemplate();
+        $template_file = $this->findTemplateFile();
+        return $this->context_substitutor->substitute($this->context, $template_file);
     }
 }
