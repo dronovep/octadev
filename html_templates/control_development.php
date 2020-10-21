@@ -10,8 +10,10 @@
 <!DOCTYPE html>
 <html lang="ru" class="control_development">
   <head>
+      <meta charset = "utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="/assets/styles/styles.css">
       <title>Разработка контрола</title>
-      <link rel="stylesheet" href="/assets/styles/index.css" />
   </head>
   <body>
     <div class="control">

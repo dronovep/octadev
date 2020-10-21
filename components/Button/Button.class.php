@@ -25,12 +25,13 @@ class Button {
 
     public function __toString() {
 
-        return (new ObTemplater([
-            'context' => [
+        $file_template_dto = new FileTemplateDTO();
+            $file_template_dto->context = [
                 'class' => $this->class,
                 'label' => $this->label
-            ],
-            'template' => $this->template
-        ]))->call();
+            ];
+            $file_template_dto->template_name = $this->template;
+
+        return (new FileTemplateHtmlRenderer())->call($file_template_dto);
     }
 }

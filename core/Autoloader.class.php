@@ -17,21 +17,25 @@ class Autoloader {
         'DatabaseRequisites' => Constants::PROJECT_ROOT . 'database/DatabaseRequisites.class.php',
         'App' => Constants::PROJECT_ROOT . 'core/' . 'App.class.php',
         'Button' => Constants::COMPONENTS_PATH . 'Button/' . 'Button.class.php',
-        'Templater' => Constants::PROJECT_ROOT . 'core/' . 'Templater.class.php',
+        'DTO' => Constants::PROJECT_ROOT  . 'core/' . 'DTO.class.php',
+        'Functional' => Constants::PROJECT_ROOT  . 'core/' . 'Functional.class.php',
+        'FileTemplateDTO' => Constants::PROJECT_ROOT . 'core/' . 'FileTemplateDTO.class.php',
+        'FileTemplateHtmlRenderer' => Constants::PROJECT_ROOT . 'core/' . 'FileTemplateHtmlRenderer.class.php',
         'ObTemplater' => Constants::PROJECT_ROOT . 'core/' . 'ObTemplater.class.php',
         'ObjectStateValidator' => Constants::PROJECT_ROOT . 'core/' . 'ObjectStateValidator.interface.php',
-        'Functional' => Constants::PROJECT_ROOT . 'core/' . 'Functional.class.php',
         'NameToFileMapper' => Constants::PROJECT_ROOT . 'core/' . 'NameToFileMapper.interface.php',
         'PhpViewTemplateNameToFileMapper' => Constants::PROJECT_ROOT . 'core/' . 'PhpViewTemplateNameToFileMapper.class.php',
         'ControlDevelopment' => Constants::COMPONENTS_PATH  . 'ControlDevelopment/' . 'ControlDevelopment.class.php',
-        'Substitutor' => Constants::PROJECT_ROOT  . 'core/' . 'Substitutor.interface.php',
-        'ObFileTemplateContextSubstitutor' => Constants::PROJECT_ROOT  . 'core/' . 'ObFileTemplateContextSubstitutor.class.php'
+        'ErrorMessageTemplateNameToFileMapper' => Constants::PROJECT_ROOT  . 'core/' . 'ErrorMessageTemplateNameToFileMapper.class.php',
+        'Singleton' => Constants::PROJECT_ROOT  . 'core/' . 'Singleton.interface.php',
+        'GenericExceptionGenerator' => Constants::PROJECT_ROOT  . 'core/' . 'GenericExceptionGenerator.class.php',
+        'StandartExceptionGenerator' => Constants::PROJECT_ROOT  . 'core/' . 'StandartExceptionGenerator.class.php'
     ];
 
     private static function load($classname) {
 
         if (!key_exists($classname, self::$map) or !file_exists(self::$map[$classname])){
-            throw new Exception('Класс не указан в карте или его файл не найден');
+            throw new Exception("Класс $classname не указан в карте или его файл не найден");
         }
 
         require_once self::$map[$classname];

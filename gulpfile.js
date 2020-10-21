@@ -1,5 +1,6 @@
 const gulp = require('gulp');
-const ts = require("gulp-typescript");
+
+// const ts = require("gulp-typescript");
 // const tsProject = ts.createProject("tsconfig.json");
 const browserify = require("browserify");
 const source = require("vinyl-source-stream");
@@ -10,18 +11,15 @@ sass.compiler = require('node-sass');
 
 
 function styles(finish) {
-    console.log("Building styles");
-    gulp.src('./styles/**/*.scss')
+    // gulp.src('./styles/**/*.scss')
+    gulp.src('./styles/styles.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('./public/assets/styles'))
     ;
     finish();
 }
 
-gulp.task('styles', styles);
-
 function scripts(finish) {
-    console.log("Building scripts");
     // tsProject.src().pipe(tsProject()).js.pipe(gulp.dest("public/assets/scripts"));
     browserify({
       basedir: ".",
@@ -37,29 +35,9 @@ function scripts(finish) {
     finish();
 }
 
-gulp.task('scripts', scripts);
+const build = gulp.parallel(styles, scripts);
 
-function a(finish) {
-    console.log("Invoking 'a'");
-    finish();
-}
-
-function b(finish) {
-    console.log("Invoking 'b'");
-    finish();
-}
-
-
-function build(finish) {
-    console.log("Building project:");
-    gulp.series(a, b);
-    finish();
-}
-
-gulp.task('default', build);
-gulp.task('build', build);
-
-// exports.styles = styles;
-// exports.scripts = scripts;
-// exports.default = build;
-// exports.build   = build;
+exports.styles = styles;
+exports.scripts = scripts;
+exports.build   = build;
+exports.default = build;

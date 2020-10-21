@@ -9,6 +9,6 @@
 class PhpViewTemplateNameToFileMapper implements NameToFileMapper {
 
     public function map(string $template_name): string {
-        return Constants::TEMPLATES_PATH . $template_name . '.php';
+        return Constants::HTML_TEMPLATES_PATH . $template_name . '.php';
     }
 }

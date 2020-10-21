@@ -22,10 +22,11 @@ class ControlDevelopment {
 
     public function __toString() {
 
-        return (new ObTemplater([
-            'context' => $this->context,
-            'template' => $this->template
-        ]))->call();
+        $file_template_dto = new FileTemplateDTO();
+            $file_template_dto->context = $this->context;
+            $file_template_dto->template_name = $this->template;
+
+        return (new FileTemplateHtmlRenderer())->call($file_template_dto);
     }
 }
 

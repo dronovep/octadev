@@ -1,9 +1,8 @@
 <?php
 /**
- * Функционал - заклассованая функция. По сути классовая обертка для функции.
- * Вместо использования обычных функций с учетом их сигнатур,
- * теперь сигнатура функции записана в поля объекта, имя класса олицетворяет  имя функции,
- * а вызов функции делается через метод call
+ * Функционал - это функция, реализованная через класс.
+ * Создание функционала, вызов его метода call с передачей соответствующей ДТО - равносильно вызову функции с определенным перечнем аргументов
+ * Преимущество функционала в том, что класс более гибок, как языковая единица, также вместо списка аргументов используется строго типизированная DTO
  * User: Евгений Дронов
  * Date: 11.10.2020
  * Time: 22:37
@@ -11,81 +10,38 @@
 
 abstract class Functional {
 
-    const SIGNATURE = [];
+    protected static $dto_type = '';
 
-    private $unset_properties;
+    protected final function checkDTOTypeExistense(DTO $dto) {
 
-    public final function __construct(array $args) {
-
-        $this->predecorateConstructor($args);
-        $this->unset_properties = [];
-        foreach (static::SIGNATURE AS $name => $type) {
-            $this->unset_properties[$name] = null;
-        }
-
-        foreach ($args as $name => $value ) {
-            $this->__set($name, $value);
-        }
-    }
-
-    protected abstract function predecorateConstructor(array &$args);
-
-    protected final function checkPropertyType(string $property_name, $property_value) {
-
-        $required_type = static::SIGNATURE[$property_name];
-        if (in_array($required_type, Constants::PHP_ELEMENTARY_TYPES)) {
-
-            $check_type_func = "is_$required_type";
-            if (!$check_type_func($property_value)) {
-                throw new Exception(
-                    "Поле $property_name должно быть типа $required_type, а по факту имеет значение " .
-                    var_export($property_value, true)
-                );
-            }
-        } else {
-
-            try {
-                class_exists($required_type);
-            } catch (Exception $e) {
-                throw new Exception(
-                    "Неправильно составлена сигнатура функционала: полю $property_name указан несуществующий тип $required_type"
-                );
-            }
-
-            if (!($property_value instanceof $required_type)) {
-                throw new Exception(
-                    "Поле $property_name должно быть типа $required_type, а по факту имеет значение " .
-                    var_export($property_value, true)
-                );
-            }
-        }
-    }
-
-
-
-    public final function __get($property_name) {
-        return $this->$property_name ?: null;
-    }
-    
-    public final function __set($property_name, $property_value) {
-        if (key_exists($property_name, static::SIGNATURE)) {
-            $this->checkPropertyType($property_name, $property_value);
-        }
-        $this->$property_name = $property_value;
-        if (key_exists($property_name, $this->unset_properties)) {
-            unset($this->unset_properties[$property_name]);
-        }
-    }
-
-    protected abstract function execute();
-
-    public function call() {
-        if (!empty($this->unset_properties)) {
-            throw new Exception(
-                "В данный момент еще нельзя использовать функционал, так как пока отсутствуют поля " .
-                var_export($this->unset_properties, true)
+        try {
+            class_exists(static::$dto_type);
+        } catch(Exception $e) {
+            $exception_generator = StandartExceptionGenerator::getSingleton();
+            $exception_generator->generateExceptionUsingContextArrayAndErrorMessageTemplateName(
+                ['dto_type' => static::$dto_type],
+                "dto_type_doesn't_exist"
             );
         }
-        return $this->execute();
+    }
+
+    protected final function checkDTOCorrespondsItsType(DTO $dto) {
+
+        if (!($dto instanceof static::$dto_type)) {
+            $exception_generator = StandartExceptionGenerator::getSingleton();
+            $exception_generator->generateExceptionUsingContextArrayAndErrorMessageTemplateName(
+                ['dto_type' => static::$dto_type],
+                "dto_value_wrong_type"
+            );
+        }
+    }
+
+    protected abstract function execute(DTO $dto);
+
+    public function call(DTO $dto) {
+        $this->checkDTOTypeExistense($dto);
+        $this->checkDTOCorrespondsItsType($dto);
+        $dto->validate();
+        return $this->execute($dto);
     }
 }

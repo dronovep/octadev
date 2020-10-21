@@ -17,7 +17,9 @@ class Constants {
     const WEB_PATH = self::PROJECT_ROOT .'public/';
 
     /** @var string путь к папке, содержащей шаблоны различных gui элементов приложения */
-    const TEMPLATES_PATH = self::PROJECT_ROOT . 'templates/';
+    const HTML_TEMPLATES_PATH = self::PROJECT_ROOT . 'html_templates/';
+
+    const ERROR_MESSAGE_TEMPLATES_PATH = self::PROJECT_ROOT . 'error_message_templates/';
 
     const PHP_ELEMENTARY_TYPES = [
         'int',

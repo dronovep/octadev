@@ -6,7 +6,7 @@
  * Time: 18:54
  */
 
-class ObTemplater extends Templater {
+class ObFileTemplateDTO extends FileTemplateDTO {
 
     protected function predecorateConstructor(array& $args) {
 
