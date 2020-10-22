@@ -1,9 +1,9 @@
 <?php
 /**
- * Класс отвечающий за бэкенд кнопки
+ * gui_components.php
  * User: Евгений Дронов
- * Date: 11.10.2020
- * Time: 18:04
+ * Date: 22.10.2020
+ * Time: 14:41
  */
 
 class Button {
@@ -30,6 +30,30 @@ class Button {
                 'class' => $this->class,
                 'label' => $this->label
             ];
+            $file_template_dto->template_name = $this->template;
+
+        return (new FileTemplateHtmlRenderer())->call($file_template_dto);
+    }
+}
+
+class ControlDevelopment {
+
+    /** @var Object объект контрола, который мы разрабатываем */
+    private $context = [
+        'control' => null
+    ];
+
+    private $template = 'control_development';
+
+    public function __construct(Object $control) {
+
+        $this->context['control'] = $control;
+    }
+
+    public function __toString() {
+
+        $file_template_dto = new FileTemplateDTO();
+            $file_template_dto->context = $this->context;
             $file_template_dto->template_name = $this->template;
 
         return (new FileTemplateHtmlRenderer())->call($file_template_dto);
