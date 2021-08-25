@@ -8,7 +8,7 @@ use mapp\database\known_requisites\Octatest;
 class Main
 {
     public function run() : void {
-        $connection = Connector::getForRequisites(new Octatest());
+        $connection = Connector::createConnectionForRequisites(new Octatest());
 
         $result = $connection->executeQuery(/** @lang PostgreSQL */"SELECT * FROM test.t_cars");
         Connector::disconnect($connection);

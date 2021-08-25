@@ -11,22 +11,19 @@ abstract class Connector extends Connection
     protected abstract function __construct(Requisites $requisites);
     protected abstract function close() :void;
 
-    public static function getForRequisites(Requisites $requisites) :Connection
+    public static function createConnectionForRequisites(Requisites $requisites) :Connection
     {
-        $connection_class = self::getConnectionClassForDriver($requisites->getDriverType());
+        $driver_type = $requisites->getDriverType();
+        switch ($requisites->getDriverType()) {
+            case DriverTypes::POSTGRESQL:
+                $connection = new PDOConnection($requisites);
+                break;
 
-        return new $connection_class($requisites);
-    }
-
-    private final static function getConnectionClassForDriver(string $driver_type) :string
-    {
-        if ($driver_type === DriverTypes::POSTGRESQL) {
-            $connection_class = PDOConnection::class;
-        } else {
-            throw new Exception("Еще не реализован класс работы с БД для драйвера $driver_type");
+            default:
+                throw new Exception("Еще не реализован класс работы с БД для драйвера $driver_type");
         }
 
-        return $connection_class;
+        return $connection;
     }
 
     public static function disconnect(Connection &$connection) :void
