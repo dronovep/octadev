@@ -29,6 +29,6 @@ abstract class Connector extends Connection
     public static function disconnect(Connection &$connection) :void
     {
         $connection->close();
-        unset($connection);
+        $connection = null;
     }
 }
