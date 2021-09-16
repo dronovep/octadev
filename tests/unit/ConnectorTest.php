@@ -15,27 +15,41 @@ class ConnectorTest extends Unit
 
     public function testCreateConnectionForRequisites() :void
     {
-        $this->createConnection();
-        $this->assertConnectionIsNotEmpty();
+        $this->assertConnectionIsNotNull();
         $this->assertConnectionHasValidType();
-        $this->assertCarWithFirstIdIsSorento();
     }
 
     public function testDisconnect()
     {
-        $this->createConnection();
         Connector::disconnect($this->connection);
-        $this->assertConnectionIsNullNow();
+        $this->assertConnectionIsNull();
     }
+
+
+
+    protected function _before(): void {
+        $this->createConnection();
+    }
+
+    protected function _after(): void {
+        $this->destroyConnection();
+    }
+
+
 
     private function createConnection() :void
     {
         $this->connection = Connector::createConnectionForRequisites(new Octatest());
     }
 
-    private function assertConnectionIsNotEmpty() :void
+    private function destroyConnection(): void
     {
-        $this->assertNotEquals(null, $this->connection);
+        unset($this->connection);
+    }
+
+    private function assertConnectionIsNotNull() :void
+    {
+        $this->assertNotNull($this->connection);
     }
 
     private function assertConnectionHasValidType() :void
@@ -49,7 +63,7 @@ class ConnectorTest extends Unit
         $this->assertEquals('Sorento', $data[0]['model']);
     }
 
-    private function assertConnectionIsNullNow() :void
+    private function assertConnectionIsNull() :void
     {
         $this->assertEquals(null, $this->connection);
     }
